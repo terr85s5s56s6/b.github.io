@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTMLINK</title>
+
+  <meta name="title" content="HTMLINK">
+  <meta name="description" content="Preview your html code online.">
+  <meta name="google-site-name" content="HTMLINK">
+  <meta name="keywords"
+    content="HTML preview, HTML viewer, preview HTML file, view HTML from URL, host HTML online, HTML tester, HTML live preview, HTML render online, HTMLINK, HTML preview tool, preview HTML code, online HTML previewer, show HTML from link, view HTML content">
+  <meta name="author" content="HTMLINK">
+  <meta name="publisher" content="HTMLINK">
+  <meta name="robots" content="index, follow">
+  <meta name="application-name" content="HTMLINK">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="HTMLINK">
+  <meta property="og:description" content="Preview your html code online.">
+  <meta property="og:image" content="https://htmlink.pages.dev/src/512.png">
+  <meta property="og:url" content="https://htmlink.pages.dev">
+  <meta property="og:site_name" content="HTMLINK">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:title" content="HTMLINK">
+  <meta name="twitter:description" content="Preview your html code online.">
+  <meta name="twitter:image" content="https://htmlink.pages.dev/src/512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="https://htmlink.pages.dev">
+  <meta property="twitter:url" content="https://htmlink.pages.dev">
+
+
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/x-icon" href="https://htmlink.pages.dev/src/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://htmlink.pages.dev/src/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="https://htmlink.pages.dev/src/96.png">
+  <!-- <link rel="icon" type="image/png" sizes="120x120" href="../src/"> -->
+  <!-- <link rel="icon" type="image/x-icon" sizes="120x120" href="https://badercharaf.com/src/120.ico"> -->
+  <link rel="icon" type="image/png" sizes="180x180" href="https://htmlink.pages.dev/src/180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://htmlink.pages.dev/src/192.png">
+  <!-- <link rel="icon" type="image/png" sizes="256x256" href="../src/"> -->
+
+  <link rel="canonical" href="https://htmlink.pages.dev">
+
+  <!-- Apple Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://htmlink.pages.dev/src/180.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="https://htmlink.pages.dev/src/192.png">
+
+  <!-- Microsoft Specific Icons -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://htmlink.pages.dev/src/512.png">
+
+  <!-- google -->
+  <meta name="google-site-verification" content="pU56kaSMW7wbK1iPHX0yK6NJDe9ENbwFRnUiPrS-0Mg" />
+
+  <!-- Structured Data - JSON-LD -->
+  <script type="application/ld+json">
+        [
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "HTMLINK",
+            "url": "https://htmlink.pages.dev",
+            "alternateName": "HTMLLINK"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "HTMLINK",
+            "url": "https://htmlink.pages.dev",
+            "logo": "https://htmlink.pages.dev/src/512.png",
+            "sameAs": [
+              "https://t.me/htmlink_hl"
+            ]
+          }
+        ]
+      </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: #20252F;
+    }
+
+    #container {
+      width: 100%;
+      height: auto;
+      padding: 20px;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #4a90e2;
+    }
+
+    #logo {
+      width: 40px;
+      height: 40px;
+      background: url('../src/180.png') no-repeat center center/100%;
+      border-radius: 5px;
+    }
+
+    #siteName {
+      font-size: 30px;
+      font-weight: 700;
+      color: #ffffffdd;
+    }
+
+    .titleText {
+      background: #2E333E;
+      padding: 20px 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 0 1px #ffffff44;
+      /* margin: 15px 0; */
+    }
+
+    .title {
+      font-size: 23px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .txt {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #ffffffdd;
+      word-wrap: break-word;
+    }
+
+    .bold {
+      color: #42A5F5;
+      font-weight: 700;
+
+    }
+
+    .link {
+      cursor: pointer;
+      color: #20B2AA;
+      border-bottom: 1.5px solid #20B2AA;
+    }
+
+    .link:active {
+      opacity: 70%;
+    }
+
+    #inptGnrtRslt {
+      width: 100%;
+      max-width: 800px;
+      height: fit-content;
+      margin: 1px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 0 20px;
+    }
+
+    #inptGnrt {
+      display: flex;
+      gap: 15px;
+    }
+
+    #divInpt {
+      background-color: #434954;
+      min-height: 50px;
+      flex: 1;
+      border: 1.5px solid #ffffff44;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+    }
+
+    #input {
+      width: 100%;
+      height: fit-content;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      color: #eee;
+      background-color: transparent;
+    }
+
+    #input::placeholder {
+      color: #888;
+    }
+
+    #generate {
+      width: 140px;
+      height: 50px;
+      background-color: #1c73cc;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      line-height: 50px;
+      text-align: center;
+    }
+
+    #generate:active {
+      background-color: #0a51aa;
+    }
+
+    #result {
+      width: 100%;
+      height: 50px;
+      background-color: #434954;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      color: #ddd;
+      border-radius: 6px;
+    }
+
+    #txtErr {
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: none;
+      text-align: center;
+      color: #f00;
+    }
+
+    #footer {
+      padding: 10px 10px 10px 15px;
+      box-shadow: 0 0 0 1px #4a90e2aa;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      color: #bbb;
+      background-color: #2E333E;
+    }
+
+    #cr {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    #tg {
+      width: 40px;
+      height: 40px;
+      background-size: 70% auto;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111646.png');
+    }
+
+    #tg:hover {
+      opacity: 1;
+    }
+
+
+
+
+
+    @media (max-width: 640px) {
+
+      #logo {
+        margin: 0 0 0 15px;
+      }
+
+      #siteName {
+        margin: 0 auto;
+        font-size: 25px;
+      }
+
+      #inptGnrt {
+        flex-direction: column;
+      }
+
+      #generate {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      #logo {
+        margin: 0 0 0 15px;
+      }
+
+      #siteName {
+        margin: 0 auto;
+        font-size: 25px;
+      }
+    }
+
+    #ad300x250 {
+      overflow-y: hidden;
+      width: 100%;
+      height: auto;
+      text-align: center;
+    }
+
+    #ad300x50 {
+      overflow-y: hidden;
+      width: 100%;
+      height: auto;
+      text-align: center;
+    }
+
+    #ad468x60 {
+      overflow-y: hidden;
+      width: 100%;
+      height: auto;
+      text-align: center;
+    }
+
+    #ad468x60::-webkit-scrollbar {
+      display: none;
+    }
+
+    #paypal,
+    #patreon {
+      color: #fff;
+      background-color: #0874E1;
+      padding: 2px 8px 4px 8px;
+      border-radius: 3px;
+      font-size: 14px;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    #paypal:active,
+    #patreon:active {
+      opacity: 80%;
+    }
+
+    #paypal {
+      background-color: #0874E1;
+      margin: 0 5px 0 0;
+    }
+
+    #patreon {
+      background-color: #131313;
+      margin: 0 0 0 5px;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div id="container">
+    <div id="header">
+      <div id="logo"></div>
+      <p id="siteName">HTMLINK</p>
+    </div>
+
+
+
+    <div class="titleText">
+      <p class="title">How to upload the file?</p>
+
+      <p class="txt">1- Create your code using <span class="bold">HTML, CSS,</span> and <span
+          class="bold">JavaScript.</span></p>
+
+      <p class="txt">2- Save the file with a <span class="bold">.txt</span> extension. like: <em
+          style="font-weight: 500;">index.txt</em></p>
+
+      <p class="txt">3- Upload the file to <span class="bold link" onclick="go('https://catbox.moe')">https://catbox.moe
+          🌐</span>.</p>
+
+      <p class="txt">4- Copy the direct link to the uploaded file and paste it in the box below.</p>
+
+      <p class="txt">⚠ The link should look like: <span class="bold">https://files.catbox.moe/abc123.txt</span></p>
+
+      <!-- <p class="txt">❓ Still confused? <span class="bold link" onclick="go('https://catbox.moe')">▶️ Click here to watch a
+          short video tutorial.</span></p> -->
+    </div>
+
+
+    
+
+    <div id="inptGnrtRslt">
+
+      <div id="inptGnrt">
+        <div id="divInpt">
+          <input type="text" id="input" placeholder="https://files.catbox.moe/abc123.txt" autocomplete="off">
+        </div>
+
+        <p id="generate" onclick="check()">GENERATE</p>
+      </div>
+
+      <p id="txtErr"></p>
+
+      <p id="result" onclick="fCopy()"></p>
+    </div>
+
+
+    <div class="titleText">
+      <p class="title">How does this service work?</p>
+      <p class="txt">A simple script fetches the content of your uploaded <span class="bold">.txt</span> file from <em
+          style="font-weight: 500;">catbox.moe</em> and displays it as HTML.</p>
+      <p class="txt">We only support files hosted on <span class="bold">catbox.moe</span> because it’s fast, free, and
+        reliable. Other sources (Mediafire, Google drive, etc...) are not supported.</p>
+    </div>
+
+    <div class="titleText">
+      <p class="title">📜 Privacy Policy</p>
+      <p class="txt">We do not collect personal data, use cookies, or track users.</p>
+      <p class="txt">this tool run locally in your
+        browser, and no files are stored on any server.</p>
+    </div>
+
+    <div class="titleText">
+      <p class="title">📄 Terms of Service</p>
+      <p class="txt">By using <strong style="color: #77FF77DD"><em>htmlink.com</em></strong>, you agree to use the tools
+        legally and ethically. Misuse is entirely your responsibility.</p>
+      <p class="txt">We are not liable for how the tools are used or for the content generated.</p>
+      <p class="txt">Terms may change without
+        notice.</p>
+    </div>
+
+    <div class="titleText">
+      <p class="title">💲 Is this service free?</p>
+      <p class="txt">🆓 Yes — all features are completely free to use.</p>
+      <p class="txt">📢 We only show ads on the <strong>Create</strong> page (this page) to support the platform. No
+        popups,
+        redirects, or forced ads.</p>
+      <p class="txt">✅ You're free to access this page even with an ad blocker. However, please keep in mind that
+        maintaining a server capable of handling high traffic requires a monthly payment.</p>
+      <p class="txt">💯 The page contains just 3 ads, and none of them are annoying or intrusive — no popups or anything
+        like that.</p>
+      <p class="txt">🔗 Generated links go directly to the target without any waiting pages or ad walls.</p>
+    </div>
+
+    <div class="titleText">
+      <p class="title">🎁 Support htmlink</p>
+      <p class="txt">💔 We use the free plan, and the number of visits is limited. If you want to support us 💖, you can
+        do so
+        via:</p>
+      <p class="txt"><span id="paypal" onclick="window.open('https://paypal.me/badercharaf')">PayPal</span><!--  OR <span
+          id="patreon" onclick="window.open('https://patreon.com/badercharaf')">Patreon</span> --></p>
+    </div>
+
+    <div class="titleText">
+      <p class="title">💡 About</p>
+      <p class="txt">Website developed by <span class="bold link" onclick="go('https://badercharaf.com')">Bader
+          Charaf🌐</span>.</p>
+      <p class="txt">Other Service: <span class="bold link"
+          onclick="go('https://unprofitools.pages.dev')">UNPROFITOOLS🌐</span>.</p>
+          <p class="txt">Telegram groupe chat: <span class="bold link" onclick="go('https://t.me/+xrlEKwQHwzxiNjRk')">click here</span></p>
+
+    </div>
+
+    <div id="footer">
+      <p id="cr">HTMLINK - &copy; 2025 || version 1.3</p>
+      <div id="tg" onclick="go('https://t.me/htmlPreview')"></div>
+    </div>
+  </div>
+</body>
+
+<script>
+  var resultLink;
+  var click = 1;
+  var catbox = "https://files.catbox.moe/";
+
+  function check() {
+    if (click === 1) {
+
+      result.style.display = "none";
+
+      var url = input.value.trim();
+
+      if (url.startsWith(catbox) && url.endsWith(".txt")) {
+        var id = url.substring(url.indexOf(catbox) + 25, url.indexOf(".txt"));
+
+        generate.textContent = "CHECKING...";
+        txtErr.style.display = "none";
+        click = 0;
+
+        fetch(url)
+          .then(res => res.text())
+          .then(code => {
+            id = btoa(unescape(encodeURIComponent(id)));
+            id = id.replace(/=+$/, '');
+            id = id.split("").reverse().join("");
+            resultLink = "https://htmlink.pages.dev/?id=" + id + "&hl";
+
+            setTimeout(() => {
+              result.style.display = "flex";
+              result.textContent = resultLink;
+              generate.textContent = "GENERATE";
+              click = 1;
+            }, 1500);
+
+          })
+          .catch(error => {
+            err("error fetching, Please check the file link");
+          });
+
+      } else {
+        txtErr.style.display = "block";
+        txtErr.textContent = "Please put a valid file link";
+        generate.textContent = "GENERATE";
+      }
+
+    }
+
+  }
+
+
+  function fCopy() {
+
+    try {
+      navigator.clipboard.writeText(resultLink).then(() => {
+
+        result.textContent = "Copied!";
+        setTimeout(() => {
+          result.textContent = resultLink;
+        }, 400);
+
+      }).catch(err => {
+        window.location.href = resultLink;
+      });
+    } catch {
+      window.location.href = resultLink;
+    }
+
+
+  }
+
+  function go(l) {
+    window.open(l);
+  }
+
+  function err(e) {
+    setTimeout(() => {
+      txtErr.textContent = e;
+      txtErr.style.display = "block";
+      click = 1;
+      generate.textContent = "GENERATE";
+    }, 1500);
+  }
+
+  input.oninput = () => {
+    txtErr.style.display = "none";
+  }
+</script>
+
+</html>
