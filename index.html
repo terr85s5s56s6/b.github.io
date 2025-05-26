@@ -42,7 +42,7 @@
 
 <script>
 function err() {
-    document.getElementById("content").innerHTML = "<h2>ID غير صالح أو الملف ما كاينش.</h2>";
+    document.getElementById("content").innerHTML = "<h2>المحتوى غير متاح أو فيه خطأ.</h2>";
     document.getElementById("preloader").style.display = "none";
     document.getElementById("content").style.display = "block";
 }
@@ -59,20 +59,24 @@ window.addEventListener("load", function () {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(code, 'text/html');
 
-                const content = doc.body;
+                // نضيف styles و links فالرأس
+                doc.querySelectorAll("style, link[rel='stylesheet']").forEach(tag => {
+                    document.head.appendChild(tag.cloneNode(true));
+                });
 
-                // نضفو العناصر وحدا بوحدا باش حتى script يخدم
+                // نحط المحتوى
+                const content = doc.body;
                 content.childNodes.forEach(node => {
-                    const clone = document.importNode(node, true);
-                    if (clone.tagName === 'SCRIPT') {
-                        const s = document.createElement('script');
-                        s.text = clone.textContent;
-                        document.body.appendChild(s);
+                    if (node.tagName === 'SCRIPT') {
+                        const newScript = document.createElement('script');
+                        newScript.text = node.textContent;
+                        document.body.appendChild(newScript);
                     } else {
-                        document.getElementById("content").appendChild(clone);
+                        document.getElementById("content").appendChild(node.cloneNode(true));
                     }
                 });
 
+                // نخبي preloader
                 document.getElementById("preloader").style.display = "none";
                 document.getElementById("content").style.display = "block";
             })
@@ -84,6 +88,7 @@ window.addEventListener("load", function () {
     }
 });
 </script>
+
 
 
 </body>
