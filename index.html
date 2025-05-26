@@ -1,25 +1,76 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Loading...</title>
-</head>
-<style>
-    body {
-        background-color: #000;
-    }
-</style>
+    <style>
+        body {
+            background-color: #fff;
+        }
 
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fefcfe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #preloader img {
+            width: 48px;
+        }
+
+        @media (min-width: 768px) {
+            #preloader img {
+                width: 55px;
+            }
+        }
+    </style>
+</head>
 <body>
-    <script>
+
+<div id="preloader">
+    <img src="Loading.gif" alt="Loading..." />
+</div>
+
+<div id="content" style="display:none;"></div>
+
+<script>
+    function err() {
+        // هنا دير شنو بغيتي يوقع فاش يكون id خايب
+        document.getElementById("content").innerHTML = "<h2>ID غير صالح أو الملف ما كاينش.</h2>";
+        document.getElementById("preloader").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }
+
+    window.addEventListener("load", function () {
         var i = new URLSearchParams(window.location.search).get('i');
         if (i) {
-            try {
-                fetch("https://files.catbox.moe/" + i + ".txt")
-                    .then(res => res.text())
-                    .then(code => { document.write(code); })
-                    .catch(error => { err(); });
-            } catch { err(); }
-        } else { err(); }
-        function home() { /*dir hna chno bghiti yw9a3 fach ykon id ghalat*/ }
-    </script>
+            fetch("https://files.catbox.moe/" + i + ".txt")
+                .then(res => {
+                    if (!res.ok) throw new Error("File not found");
+                    return res.text();
+                })
+                .then(code => {
+                    document.getElementById("content").innerHTML = code;
+                })
+                .catch(error => {
+                    err();
+                })
+                .finally(() => {
+                    document.getElementById("preloader").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                });
+        } else {
+            err();
+        }
+    });
+</script>
+
 </body>
 </html>
